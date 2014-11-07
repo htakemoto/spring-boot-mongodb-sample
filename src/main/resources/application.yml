@@ -1,0 +1,10 @@
+######## Application Access Point ########
+
+server:
+    address: localhost
+    port: 8080
+    #contextPath: /
+
+management:
+    port: 8081
+    #contextPath: /manage
