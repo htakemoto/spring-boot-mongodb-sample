@@ -27,7 +27,7 @@ public class UserController {
     
     // POST: http://localhost:8080/users
     // Content-Type: application/json
-    // Payload: { "firstname": "Steve", "lastname": "Jobs" }
+    // Payload: {"firstname":"Ben","lastname":"Linus","items":[{"itemName":"iPhone","quantity":1},{"itemName":"Apple","quantity":3}]}
     @RequestMapping(value="", method=RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         return userService.save(user);
@@ -45,7 +45,7 @@ public class UserController {
         return userService.findOne(userId);
     }
     
-    // GET: http://localhost:8080/users/search?firstname=bo
+    // GET: http://localhost:8080/users/search?firstname=be
     @RequestMapping(value="/search", method=RequestMethod.GET)
     public List<User> findUsers(@RequestParam String firstname) {
     	Assert.isTrue(!firstname.isEmpty(), "firstname parameter must be present");

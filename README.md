@@ -14,7 +14,7 @@ Quick start
 1. Import the project into Eclipse as Maven project
 2. Read MongoDB setup described below
 3. Find `Application.java` from side bar, right click on the file, select 'Run As' > 'Java Application' from menu.
-4. Make a POST request to [http://localhost:8080/users](http://localhost:8080/users) with the payload: `{"firstname":"Bon","lastname":"Linus","items":[{"itemName":"iPhone","quantity":1},{"itemName":"Apple","quantity":3}]}`
+4. Make a POST request to [http://localhost:8080/users](http://localhost:8080/users) with the payload: `{"firstname":"Ben","lastname":"Linus","items":[{"itemName":"iPhone","quantity":1},{"itemName":"Apple","quantity":3}]}`
 5. Make a GET request to [http://localhost:8080/users](http://localhost:8080/users)
 6. There are more endpoints. For details, check `UserController.java`
 

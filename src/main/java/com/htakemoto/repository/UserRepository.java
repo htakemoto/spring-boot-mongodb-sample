@@ -17,9 +17,9 @@ public interface UserRepository extends MongoRepository<User, String> {
 	@Query(value="{ 'firstname' : ?0 }")
     List<User> findByFirstname(String firstname);
 	
-	@Query(value="{ 'firstname' : { $regex : '^?0.*', $options: 'i' } }", count = true) // i = case insensitive
-    List<User> findByFirstnameStartingWith(String firstname, Sort sort);
+	@Query(value="{ 'firstname' : { $regex : '^?0.*', $options: 'i' } }") // i = case insensitive
+    List<User> findByFirstnameStartingWithIgnoreCase(String firstname, Sort sort);
 	
 	@Query(value="{ 'firstname' : ?0 }", count = true)
-    List<User> countByFirstname(String firstname);
+	Integer countByFirstname(String firstname);
 }

@@ -50,6 +50,12 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+    
+    @Override
+    public List<User> findByFirstnameStartingWith(String firstname) {
+        LOGGER.debug("Retrieving the list of all users with firstname start with {}", firstname);
+        return (List<User>) userRepository.findByFirstnameStartingWithIgnoreCase(firstname, new Sort(Sort.Direction.ASC,"firstname"));
+    }
 
     @Override
     @Transactional
@@ -74,11 +80,5 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.delete(userId);
         return existing;
-    }
-    
-    @Override
-    public List<User> findByFirstnameStartingWith(String firstname) {
-        LOGGER.debug("Retrieving the list of all users with firstname start with %s", firstname);
-        return (List<User>) userRepository.findByFirstnameStartingWith(firstname, new Sort(Sort.Direction.ASC,"firstname"));
     }
 }
