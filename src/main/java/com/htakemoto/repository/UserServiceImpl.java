@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,5 +74,11 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.delete(userId);
         return existing;
+    }
+    
+    @Override
+    public List<User> findByFirstnameStartingWith(String firstname) {
+        LOGGER.debug("Retrieving the list of all users with firstname start with %s", firstname);
+        return (List<User>) userRepository.findByFirstnameStartingWith(firstname, new Sort(Sort.Direction.ASC,"firstname"));
     }
 }

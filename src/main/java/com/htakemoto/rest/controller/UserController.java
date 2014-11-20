@@ -2,13 +2,13 @@ package com.htakemoto.rest.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.htakemoto.domain.User;
@@ -17,8 +17,6 @@ import com.htakemoto.repository.UserService;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    
-    protected static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     
     @Autowired
     private UserService userService;
@@ -32,14 +30,12 @@ public class UserController {
     // Payload: { "firstname": "Steve", "lastname": "Jobs" }
     @RequestMapping(value="", method=RequestMethod.POST)
     public User createUser(@RequestBody User user) {
-        LOGGER.debug("Received request to create the {}", user);
         return userService.save(user);
     }
     
     // GET: http://localhost:8080/users
     @RequestMapping(value="", method=RequestMethod.GET)
     public List<User> getUsers() {
-        LOGGER.debug("Received request to list all users");
         return userService.findAll();
     }
 
@@ -47,6 +43,13 @@ public class UserController {
     @RequestMapping(value="/{userId}", method=RequestMethod.GET)
     public User getUser(@PathVariable String userId) {
         return userService.findOne(userId);
+    }
+    
+    // GET: http://localhost:8080/users/search?firstname=bo
+    @RequestMapping(value="/search", method=RequestMethod.GET)
+    public List<User> findUsers(@RequestParam String firstname) {
+    	Assert.isTrue(!firstname.isEmpty(), "firstname parameter must be present");
+        return userService.findByFirstnameStartingWith(firstname);
     }
     
     // PUT: http://localhost:8080/users/545c38330364a69fceefbaf4
